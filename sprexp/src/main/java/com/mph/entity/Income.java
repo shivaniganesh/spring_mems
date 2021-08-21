@@ -1,7 +1,5 @@
 package com.mph.entity;
 
-import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,51 +17,51 @@ public class Income {
 	private long incomeAmount;
 
 	private String incomeDescription;
-	
-	@ManyToOne(targetEntity = Income.class)
-	@JoinColumn(name = "userId")
-	private Set<UserProfile> userProfile;
-
+	@ManyToOne
+	@JoinColumn(name = "userId",referencedColumnName = "userID")
+	private UserProfile user;
 	public Income() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	public Income(int incomeId, long incomeAmount, String incomeDescription) {
+	public Income(int incomeId, long incomeAmount, String incomeDescription, UserProfile user) {
 		super();
 		this.incomeId = incomeId;
 		this.incomeAmount = incomeAmount;
 		this.incomeDescription = incomeDescription;
+		this.user = user;
 	}
-
 	public int getIncomeId() {
 		return incomeId;
 	}
-
 	public void setIncomeId(int incomeId) {
 		this.incomeId = incomeId;
 	}
-
 	public long getIncomeAmount() {
 		return incomeAmount;
 	}
-
 	public void setIncomeAmount(long incomeAmount) {
 		this.incomeAmount = incomeAmount;
 	}
-
 	public String getIncomeDescription() {
 		return incomeDescription;
 	}
-
 	public void setIncomeDescription(String incomeDescription) {
 		this.incomeDescription = incomeDescription;
 	}
-
+	public UserProfile getUser() {
+		return user;
+	}
+	public void setUser(UserProfile user) {
+		this.user = user;
+	}
 	@Override
 	public String toString() {
 		return "Income [incomeId=" + incomeId + ", incomeAmount=" + incomeAmount + ", incomeDescription="
-				+ incomeDescription + "]";
+				+ incomeDescription + ", user=" + user + "]";
 	}
+	
+
+	
 
 }

@@ -40,4 +40,12 @@ public class ExpenseServiceImpl implements ExpenseService{
 		return expenseDao.getAllExpense();
 	}
 
+	@Override
+	public Expense getExpenseById(int expenseId) {
+		// TODO Auto-generated method stub
+		return expenseDao.getExpenseById(expenseId);
+	}
+
+
+
 }

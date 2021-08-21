@@ -13,8 +13,9 @@ public interface ExpenseDao {
 	public List<Expense> deleteExpense(int expenseId);
 
 	public List<Expense> getAllExpense();
+	
 
-	// public Income getUserProfile(Income income);
+	
 
-	// public List<UserProfile> getIncomeById(int incomeId);
+	 public Expense getExpenseById(int expenseId);
 }

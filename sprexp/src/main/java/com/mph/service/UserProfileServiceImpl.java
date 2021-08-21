@@ -9,6 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.mph.dao.UserProfileDao;
 import com.mph.entity.UserProfile;
 
+/**
+ * 
+ * @author Sujeet
+ *
+ */
 @Service
 @Transactional
 public class UserProfileServiceImpl implements UserProfileService{
@@ -38,6 +43,24 @@ public class UserProfileServiceImpl implements UserProfileService{
 	public List<UserProfile> getAllUserProfile() {
 		
 		return userProfileDao.getAllUserProfile();
+	}
+
+	@Override
+	public UserProfile login(String email, String password) {
+		// TODO Auto-generated method stub
+		return userProfileDao.login(email, password);
+	}
+
+	@Override
+	public UserProfile findByEmail(String email) {
+		// TODO Auto-generated method stub
+		return userProfileDao.findByEmail(email);
+	}
+
+	@Override
+	public UserProfile resetPassword(String email, String password) {
+		// TODO Auto-generated method stub
+		return userProfileDao.resetPassword(email, password);
 	}
 
 }

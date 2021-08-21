@@ -3,11 +3,12 @@ package com.mph.entity;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -20,20 +21,20 @@ public class UserProfile {
 	private String fname;
 	
 	private String lname;
-	
+	@Column(unique=true)
 	private String email;
 	
 	private String password;
 	
 	private long phoneNumber;
 	
-	@OneToMany
-	@JoinColumn(name = "incomeId")
+	//@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
 	private Set<Income> income;
 
-	@OneToMany
-	@JoinColumn(name = "expenseId")
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
 	private Set<Expense> expense;
+	
 
 	public UserProfile() {
 		super();

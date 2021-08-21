@@ -13,6 +13,7 @@ public interface IncomeDao {
 	public List<Income> deleteIncome(int incomeId);
 
 	public List<Income> getAllIncome();
+	
 
 	// public Income getUserProfile(Income income);
 

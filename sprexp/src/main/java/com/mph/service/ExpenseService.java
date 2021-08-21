@@ -14,8 +14,10 @@ public interface ExpenseService {
 	public List<Expense> deleteExpense(int expenseId);
 
 	public List<Expense> getAllExpense();
+	
+	 public Expense getExpenseById(int expenseId);
 
 	// public Expense getExpense(Expense expense);
 
-	// public List<Expense> getExpenseById(int expenseId);
+
 }
