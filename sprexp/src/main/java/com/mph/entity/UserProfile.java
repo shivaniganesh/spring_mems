@@ -29,10 +29,10 @@ public class UserProfile {
 	private long phoneNumber;
 	
 	//@OneToMany(cascade=CascadeType.ALL)
-	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL,orphanRemoval=true)
 	private Set<Income> income;
 
-	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL,orphanRemoval=true)
 	private Set<Expense> expense;
 	
 

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mph.entity.UserProfile;
+
 /**
  * 
  * @author Sujeet
@@ -20,17 +21,20 @@ public class UserProfileDaoImpl implements UserProfileDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-/**
- * 
- * @return Session
- */
+
+	/**
+	 * 
+	 * @return Session
+	 */
 	protected Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
-/**
- * For adding new user
- * @param userprofile
- */
+
+	/**
+	 * For adding new user
+	 * 
+	 * @param userprofile
+	 */
 	@Override
 	public void addUserProfile(UserProfile userProfile) {
 		getSession().saveOrUpdate(userProfile);
@@ -38,7 +42,9 @@ public class UserProfileDaoImpl implements UserProfileDao {
 
 	}
 
-	/**For updating userProfile
+	/**
+	 * For updating userProfile
+	 * 
 	 * @param userProfile
 	 * @return list of users after updating user in userProfile
 	 */
@@ -60,27 +66,42 @@ public class UserProfileDaoImpl implements UserProfileDao {
 
 		return getAllUserProfile();
 	}
-/**
- * For deleting user based on userId
- * @param userId
- * @return list of users after deleting specific user 
- */
+
+	/**
+	 * For deleting user based on userId
+	 * 
+	 * @param userId
+	 * @return list of users after deleting specific user
+	 */
 	@Override
 	public List<UserProfile> deleteUserProfile(int userId) {
-		// check the query!!!!!!!!!!!!!!!
-		Query query = getSession().createQuery("delete from UserProfile where userId=:userId");
+
+		Query query = getSession().createQuery("delete from Income where userId=:userId");
 		query.setParameter("userId", userId);
-		int noofrows = query.executeUpdate();
+		query.executeUpdate();
+		// deleting all the records of child table i.e all same userId records
+
+		Query query1 = getSession().createQuery("delete from Expense where userId=:userId");
+		query1.setParameter("userId", userId);
+		query1.executeUpdate();
+
+		Query query2 = getSession().createQuery("delete from UserProfile where userId=:userId");
+
+		query2.setParameter("userId", userId);
+
+		int noofrows = query2.executeUpdate();
 		if (noofrows > 0) {
 			System.out.println("Deleted " + noofrows + " rows");
 		}
 
 		return getAllUserProfile();
 	}
-/**
- * For getting all users
- * @return List of users
- */
+
+	/**
+	 * For getting all users
+	 * 
+	 * @return List of users
+	 */
 	@Override
 	public List<UserProfile> getAllUserProfile() {
 		// checkQuery!!!!!!!!!!!!!!!
@@ -89,8 +110,11 @@ public class UserProfileDaoImpl implements UserProfileDao {
 		System.out.println(userList);
 		return userList;
 	}
+
 	/**
-	 * Checking user data in userProfile database for validation if user exist it will return userProfile object
+	 * Checking user data in userProfile database for validation if user exist it
+	 * will return userProfile object
+	 * 
 	 * @param email,password
 	 * @return
 	 */
@@ -105,8 +129,10 @@ public class UserProfileDaoImpl implements UserProfileDao {
 		System.out.println("From login.." + up);
 		return up;
 	}
+
 	/**
-	 * Searching  from userProfile database based on email id
+	 * Searching from userProfile database based on email id
+	 * 
 	 * @param email
 	 */
 	@Override
@@ -117,9 +143,10 @@ public class UserProfileDaoImpl implements UserProfileDao {
 		System.out.println("from find by Email method.." + em);
 		return em;
 	}
-	
+
 	/**
 	 * on the basis of email id password will reset
+	 * 
 	 * @param email,password
 	 */
 	@Override
@@ -128,9 +155,9 @@ public class UserProfileDaoImpl implements UserProfileDao {
 		Query query = getSession().createQuery("update UserProfile set password =:password where email=:email");
 		query.setParameter("email", email);
 		query.setParameter("password", password);
-		int rs=query.executeUpdate();
-		if(rs>0) {
-			 System.out.println("Updated "+rs+ " rows");
+		int rs = query.executeUpdate();
+		if (rs > 0) {
+			System.out.println("Updated " + rs + " rows");
 		}
 
 		return null;

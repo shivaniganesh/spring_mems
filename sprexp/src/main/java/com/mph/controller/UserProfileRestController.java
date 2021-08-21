@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mph.entity.UserProfile;
 import com.mph.service.UserProfileService;
+
 /**
  * 
  * @author Sujeet
@@ -25,146 +26,156 @@ import com.mph.service.UserProfileService;
  */
 @RestController
 @RequestMapping(value = "/userProfile")
-@CrossOrigin(origins="http://localhost:4200",methods={RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
+@CrossOrigin(origins = "http://localhost:4200", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,
+		RequestMethod.DELETE })
 public class UserProfileRestController {
-	
+
 	@Autowired
 	UserProfileService userProfileService;
-	
+
 	/**
-	 * For Fetching  all users
+	 * For Fetching all users
+	 * 
 	 * @return list of userData
 	 */
 	@GetMapping("/allusers")
 	public ResponseEntity<List<UserProfile>> allUserProfile() {
-		
+
 		List<UserProfile> userProfilelist = userProfileService.getAllUserProfile();
 		System.out.println("From Rest allusers : " + userProfilelist);
-		
-		if(userProfilelist.isEmpty()) {
-			
+
+		if (userProfilelist.isEmpty()) {
+
 			return new ResponseEntity<List<UserProfile>>(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<List<UserProfile>>(userProfilelist,HttpStatus.OK);		
+		return new ResponseEntity<List<UserProfile>>(userProfilelist, HttpStatus.OK);
 	}
-	
+
 	/**
 	 * For adding new user
+	 * 
 	 * @param userProfile
 	 * @return user object if email does not exist already else throws exception
 	 * @throws Exception
 	 */
 	@PostMapping("/addUserProfile")
 	public UserProfile addUserProfile(@RequestBody UserProfile userProfile) throws Exception {
-		
-		String tempEmail=userProfile.getEmail();
-		if(tempEmail!=null && !"".equals(tempEmail)) {
-			UserProfile userData=userProfileService.findByEmail(tempEmail);
-			if(userData!=null) {
-				throw new Exception("User with email:"+tempEmail+" already exist!");
-				
+
+		String tempEmail = userProfile.getEmail();
+		if (tempEmail != null && !"".equals(tempEmail)) {
+			UserProfile userData = userProfileService.findByEmail(tempEmail);
+			if (userData != null) {
+				throw new Exception("User with email:" + tempEmail + " already exist!");
+
 			}
-			
+
 		}
-		
+
 		userProfileService.addUserProfile(userProfile);
 		return userProfile;
 	}
-	
+
 	/**
 	 * for updating userProfile
+	 * 
 	 * @param userProfile
-	 * @return 
+	 * @return
 	 * @throws Exception
 	 */
 	@PutMapping("/updateUserProfile")
 	public ResponseEntity<List<UserProfile>> updateUserProfile(@RequestBody UserProfile userProfile) throws Exception {
-		
-		
+
 		List<UserProfile> userProfilelist = userProfileService.updateUserProfile(userProfile);
 		System.out.println("From Rest update user profile : " + userProfilelist);
-		
-		if(userProfilelist.isEmpty()) {
-			
+
+		if (userProfilelist.isEmpty()) {
+
 			return new ResponseEntity<List<UserProfile>>(HttpStatus.NO_CONTENT);
 		}
-		
-		return new ResponseEntity<List<UserProfile>>(userProfilelist,HttpStatus.OK);		
-		
+
+		return new ResponseEntity<List<UserProfile>>(userProfilelist, HttpStatus.OK);
+
 	}
+
 	/**
 	 * for deleting user based on userid
+	 * 
 	 * @param userid
-	 * @return 
+	 * @return
 	 */
 	@DeleteMapping("/deleteUserProfile/{id}")
 	public ResponseEntity<List<UserProfile>> deleteUserProfile(@PathVariable("id") int userid) {
-		
+
 		List<UserProfile> userProfilelist = userProfileService.deleteUserProfile(userid);
 		System.out.println("From Rest delete user: " + userProfilelist);
-		
-		if(userProfilelist.isEmpty()) {
-			
+
+		if (userProfilelist.isEmpty()) {
+
 			return new ResponseEntity<List<UserProfile>>(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<List<UserProfile>>(userProfilelist,HttpStatus.OK);		
+		return new ResponseEntity<List<UserProfile>>(userProfilelist, HttpStatus.OK);
 	}
+
 	/**
 	 * For login validation
+	 * 
 	 * @param userProfile
-	 * @return login userProfile object after  validation
+	 * @return login userProfile object after validation
 	 * @throws Exception
 	 */
 	@PostMapping("/login")
 	public UserProfile loginUser(@RequestBody UserProfile userProfile) throws Exception {
-		String tempEmailId=userProfile.getEmail();
-		String tempPassword=userProfile.getPassword();
-		UserProfile userObj=null;
-		if(tempEmailId!=null && tempPassword!=null) {
-			userObj=userProfileService.login(tempEmailId, tempPassword);
+		String tempEmailId = userProfile.getEmail();
+		String tempPassword = userProfile.getPassword();
+		UserProfile userObj = null;
+		if (tempEmailId != null && tempPassword != null) {
+			userObj = userProfileService.login(tempEmailId, tempPassword);
 		}
-		if(userObj==null) {
+		if (userObj == null) {
 			throw new Exception("Bad credetianls,User not found");
 		}
 		return userObj;
-		
+
 	}
+
 	/**
 	 * for resetting password
+	 * 
 	 * @param userProfile
-	 * @return UserProfile object if email exist in the database else throws exception
+	 * @return UserProfile object if email exist in the database else throws
+	 *         exception
 	 * @throws Exception
 	 */
 	@PutMapping("/resetPassword")
 	public UserProfile resetPassword(@RequestBody UserProfile userProfile) throws Exception {
-		String tempEmail=userProfile.getEmail();
-		String tempPassword=userProfile.getPassword();
-		if(tempEmail!=null && !"".equals(tempEmail)) {
-			UserProfile userData=userProfileService.findByEmail(tempEmail);
-			if(userData==null) {
-				throw new Exception("User with email:"+tempEmail+" doesn't exist!");
-				
+		String tempEmail = userProfile.getEmail();
+		String tempPassword = userProfile.getPassword();
+		if (tempEmail != null && !"".equals(tempEmail)) {
+			UserProfile userData = userProfileService.findByEmail(tempEmail);
+			if (userData == null) {
+				throw new Exception("User with email:" + tempEmail + " doesn't exist!");
+
 			}
-			
+
 		}
-		
+
 		userProfileService.resetPassword(tempEmail, tempPassword);
-		
-		 return userProfile;
-		
+
+		return userProfile;
+
 	}
-	@GetMapping("/getUser/{email}")
-	public ResponseEntity<UserProfile>getUser(@PathVariable("email") String email) {
-		
-		UserProfile user = userProfileService.findByEmail(email);
-		System.out.println("From Rest allusers : " + user);
-		
-		if(user==null) {
-			
+
+	@PostMapping("/getUser")
+	public ResponseEntity<UserProfile> getUser(@RequestBody UserProfile userProfile) {
+		String tempEmail = userProfile.getEmail();
+
+		UserProfile userData = userProfileService.findByEmail(tempEmail);
+
+		if (userData == null) {
+
 			return new ResponseEntity<UserProfile>(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<UserProfile>(user,HttpStatus.OK);		
+		return new ResponseEntity<UserProfile>(userData, HttpStatus.OK);
 	}
-	
 
 }
