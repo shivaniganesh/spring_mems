@@ -2,12 +2,15 @@ package com.mph.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.mph.entity.Expense;
 import com.mph.entity.Income;
 
 @Repository
@@ -63,6 +66,15 @@ public class IncomeDaoImpl implements IncomeDao {
 		List<Income> incomeList = query.list();
 		System.out.println(incomeList);
 		return incomeList;
+	}
+
+	@Override
+	public Income getIncomeById(int incomeId) {
+		Criteria c = getSession().createCriteria(Income.class);
+		c.add(Restrictions.eq("incomeId", incomeId));
+		Income inc = (Income) c.uniqueResult();
+		System.out.println("Income Retrieved : " + inc);
+		return inc;
 	}
 
 }

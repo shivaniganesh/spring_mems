@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mph.entity.Expense;
 import com.mph.entity.Income;
 import com.mph.entity.UserProfile;
 import com.mph.service.IncomeService;
@@ -73,5 +74,19 @@ public class IncomeRestController {
 			return new ResponseEntity<List<Income>>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<Income>>(incomelist,HttpStatus.OK);		
+	}
+	
+	@GetMapping("/getIncome/{id}")
+	public ResponseEntity<Income> getIncomeByID(@PathVariable("id") int incomeId) {
+
+		Income inc = incomeService.getIncomeById(incomeId);
+		System.out.println("From Rest income emp : " + inc);
+
+		if (inc == null) {
+
+			return new ResponseEntity<Income>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<Income>(inc, HttpStatus.OK);
+
 	}
 }

@@ -164,7 +164,11 @@ public class UserProfileRestController {
 		return userProfile;
 
 	}
-
+/**
+ * Find user by email id
+ * @param userProfile
+ * @return user
+ */
 	@PostMapping("/getUser")
 	public ResponseEntity<UserProfile> getUser(@RequestBody UserProfile userProfile) {
 		String tempEmail = userProfile.getEmail();

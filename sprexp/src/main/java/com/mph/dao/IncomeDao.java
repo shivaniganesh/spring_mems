@@ -2,6 +2,7 @@ package com.mph.dao;
 
 import java.util.List;
 
+import com.mph.entity.Expense;
 import com.mph.entity.Income;
 
 public interface IncomeDao {
@@ -13,7 +14,7 @@ public interface IncomeDao {
 	public List<Income> deleteIncome(int incomeId);
 
 	public List<Income> getAllIncome();
-	
+	public Income getIncomeById(int incomeId);
 
 	// public Income getUserProfile(Income income);
 

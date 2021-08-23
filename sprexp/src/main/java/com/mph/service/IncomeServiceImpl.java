@@ -40,4 +40,10 @@ public class IncomeServiceImpl implements IncomeService{
 		return incomeDao.getAllIncome();
 	}
 
+	@Override
+	public Income getIncomeById(int incomeId) {
+		// TODO Auto-generated method stub
+		return incomeDao.getIncomeById(incomeId);
+	}
+
 }

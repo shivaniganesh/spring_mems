@@ -13,6 +13,7 @@ public interface IncomeService {
 	public List<Income> deleteIncome(int incomeId);
 
 	public List<Income> getAllIncome();
+	public Income getIncomeById(int incomeId);
 
 	// public Income getIncome(Income income);
 
