@@ -2,6 +2,8 @@ package com.mph.controller;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +31,7 @@ public class ExpenseRestController {
 
 	@Autowired
 	ExpenseService expenseService;
+	private static final Logger logger = Logger.getLogger(ExpenseRestController.class);
 
 	@RequestMapping(value = "/registerpage", method = RequestMethod.GET)
 	public ModelAndView register() {
@@ -38,6 +41,16 @@ public class ExpenseRestController {
 
 	@GetMapping("/allexpenses")
 	public ResponseEntity<List<Expense>> allIncome() {
+		
+		logger.info("GETTING REQUEST FROM local host TO SHOW All Expense");
+		System.out.println(logger.getName()+ "  " + logger.getLevel());
+		
+		
+		
+		PropertyConfigurator.configure(ExpenseRestController.class.getClassLoader().getResource("log4j.properties"));
+		
+		
+		System.out.println("Log4 j configuration is SUCCESSFUL");
 
 		List<Expense> expenselist = expenseService.getAllExpense();
 		System.out.println("From Rest allexpenses : " + expenselist);
@@ -48,6 +61,11 @@ public class ExpenseRestController {
 		}
 		return new ResponseEntity<List<Expense>>(expenselist, HttpStatus.OK);
 	}
+	/**
+	 * @author Sourav Bhaiya ji
+	 * @param expense
+	 * @return
+	 */
 
 	@PostMapping("/addexpense")
 	public Expense addExpense(@RequestBody Expense expense) {

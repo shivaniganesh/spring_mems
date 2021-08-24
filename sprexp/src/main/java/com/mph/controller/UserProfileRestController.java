@@ -2,6 +2,8 @@ package com.mph.controller;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mph.entity.UserProfile;
+
 import com.mph.service.UserProfileService;
 
 /**
@@ -33,6 +36,7 @@ public class UserProfileRestController {
 	@Autowired
 	UserProfileService userProfileService;
 
+	private static final Logger logger = Logger.getLogger(UserProfileRestController.class);
 	/**
 	 * For Fetching all users
 	 * 
@@ -40,6 +44,15 @@ public class UserProfileRestController {
 	 */
 	@GetMapping("/allusers")
 	public ResponseEntity<List<UserProfile>> allUserProfile() {
+		logger.info("GETTING REQUEST FROM CLIENT TO SHOW THE LIST OF Userprofile");
+		System.out.println(logger.getName()+ "  " + logger.getLevel());
+		
+		//System.out.println(logger.getMessageFactory());
+		
+		PropertyConfigurator.configure(UserProfileRestController.class.getClassLoader().getResource("log4j.properties"));
+		//PropertyConfigurator.configure("log4j.properties");
+		
+		System.out.println("Log4 j configuration is SUCCESSFUL");
 
 		List<UserProfile> userProfilelist = userProfileService.getAllUserProfile();
 		System.out.println("From Rest allusers : " + userProfilelist);

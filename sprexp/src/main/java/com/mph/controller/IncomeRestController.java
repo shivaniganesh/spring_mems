@@ -2,6 +2,8 @@ package com.mph.controller;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,9 +31,21 @@ public class IncomeRestController {
 	
 	@Autowired
 	IncomeService incomeService;
+	private static final Logger logger = Logger.getLogger(IncomeRestController.class);
 	
 	@GetMapping("/allIncomes")
 	public ResponseEntity<List<Income>> allIncome() {
+
+		logger.info("GETTING REQUEST FROM local host TO SHOW All Incomes");
+		System.out.println(logger.getName()+ "  " + logger.getLevel());
+		
+		
+		
+		PropertyConfigurator.configure(IncomeRestController.class.getClassLoader().getResource("log4j.properties"));
+		
+		
+		System.out.println("Log4 j configuration is SUCCESSFUL");
+
 		
 		List<Income> incomelist = incomeService.getAllIncome();
 		System.out.println("From Rest allincomes : " + incomelist);
