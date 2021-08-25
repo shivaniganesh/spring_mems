@@ -29,10 +29,10 @@ public class UserProfile {
 	private long phoneNumber;
 	
 	//@OneToMany(cascade=CascadeType.ALL)
-	@OneToMany(mappedBy="user", cascade=CascadeType.ALL,orphanRemoval=true)
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
 	private Set<Income> income;
 
-	@OneToMany(mappedBy="user", cascade=CascadeType.ALL,orphanRemoval=true)
+	@OneToMany(mappedBy="user",cascade=CascadeType.ALL)
 	private Set<Expense> expense;
 	
 
@@ -98,6 +98,9 @@ public class UserProfile {
 	public void setPhoneNumber(long phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+	
+
+	
 
 	@Override
 	public String toString() {

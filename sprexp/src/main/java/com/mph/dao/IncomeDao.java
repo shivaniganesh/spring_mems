@@ -15,6 +15,8 @@ public interface IncomeDao {
 
 	public List<Income> getAllIncome();
 	public Income getIncomeById(int incomeId);
+	
+	public List<Income> getUserIncome(int userId);
 
 	// public Income getUserProfile(Income income);
 

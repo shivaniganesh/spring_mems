@@ -15,8 +15,6 @@ public interface IncomeService {
 	public List<Income> getAllIncome();
 	public Income getIncomeById(int incomeId);
 
-	// public Income getIncome(Income income);
-
-	// public List<Income> getIncomeById(int incomeId);
+	public List<Income> getUserIncome(int userId);
 
 }

@@ -2,6 +2,7 @@ package com.mph.dao;
 
 import java.util.List;
 
+import org.eclipse.jface.text.templates.GlobalTemplateVariables.User;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -78,5 +79,19 @@ public class ExpenseDaoImpl implements ExpenseDao {
 		System.out.println("Employee Retrieved : " + exp);
 		return exp;
 	}
+
+	@Override
+	public List<Expense> getUserExpense(int userId) {
+		// TODO Auto-generated method stub
+		Query query = getSession().createQuery("from Expense expense where userId=:uid");
+		query.setParameter("uid", userId);
+		
+
+		List<Expense> expenseListSelected = query.list();
+		System.out.println(expenseListSelected);
+		return expenseListSelected;
+	}
+
+
 
 }

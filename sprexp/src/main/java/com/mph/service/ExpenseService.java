@@ -16,6 +16,7 @@ public interface ExpenseService {
 	public List<Expense> getAllExpense();
 	
 	 public Expense getExpenseById(int expenseId);
+	 public List<Expense> getUserExpense(int userId);
 
 	// public Expense getExpense(Expense expense);
 

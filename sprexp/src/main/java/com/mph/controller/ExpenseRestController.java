@@ -40,7 +40,7 @@ public class ExpenseRestController {
 	}
 
 	@GetMapping("/allexpenses")
-	public ResponseEntity<List<Expense>> allIncome() {
+	public ResponseEntity<List<Expense>> allExpenses() {
 		
 		logger.info("GETTING REQUEST FROM local host TO SHOW All Expense");
 		System.out.println(logger.getName()+ "  " + logger.getLevel());
@@ -62,7 +62,7 @@ public class ExpenseRestController {
 		return new ResponseEntity<List<Expense>>(expenselist, HttpStatus.OK);
 	}
 	/**
-	 * @author Sourav Bhaiya ji
+	 * @author Sourav
 	 * @param expense
 	 * @return
 	 */
@@ -112,6 +112,18 @@ public class ExpenseRestController {
 		}
 		return new ResponseEntity<Expense>(exp, HttpStatus.OK);
 
+	}
+	@GetMapping("/selectedexpenses/{uid}")
+	public ResponseEntity<List<Expense>> selectedExpense(@PathVariable("uid") int userid) {
+		
+		List<Expense> expenselistselected = expenseService.getUserExpense(userid);
+		System.out.println("From Rest allselectedexpenses : " + expenselistselected);
+		
+		if(expenselistselected.isEmpty()) {
+			
+			return new ResponseEntity<List<Expense>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<Expense>>(expenselistselected,HttpStatus.OK);
 	}
 
 }

@@ -10,8 +10,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.mph.entity.Expense;
 import com.mph.entity.Income;
+
 
 @Repository
 public class IncomeDaoImpl implements IncomeDao {
@@ -76,5 +76,20 @@ public class IncomeDaoImpl implements IncomeDao {
 		System.out.println("Income Retrieved : " + inc);
 		return inc;
 	}
+
+	@Override
+	public List<Income> getUserIncome(int userId) {
+		// TODO Auto-generated method stub
+		
+		Query query = getSession().createQuery("from Income Income where userId=:uid");
+		query.setParameter("uid", userId);
+		
+
+		List<Income> IncomeListSelected = query.list();
+		System.out.println(IncomeListSelected);
+		return IncomeListSelected;
+		
+	}
+
 
 }

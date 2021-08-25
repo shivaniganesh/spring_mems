@@ -46,6 +46,13 @@ public class ExpenseServiceImpl implements ExpenseService{
 		return expenseDao.getExpenseById(expenseId);
 	}
 
+	@Override
+	public List<Expense> getUserExpense(int userId) {
+		// TODO Auto-generated method stub
+		return expenseDao.getUserExpense(userId);
+	}
+
+
 
 
 }

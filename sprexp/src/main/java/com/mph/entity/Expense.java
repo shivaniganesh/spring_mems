@@ -29,7 +29,7 @@ public class Expense {
 
 	private String expenseDescription;
 	@ManyToOne
-	@JoinColumn(name = "userId",referencedColumnName = "userID")
+	@JoinColumn(name = "userId",referencedColumnName = "USERID")
 	private UserProfile user;
 	
 
