@@ -4,7 +4,11 @@ import java.util.List;
 
 import com.mph.entity.Income;
 
-
+/**
+ * 
+ * @author shivani
+ *
+ */
 public interface IncomeService {
 	public void addIncome(Income income);
 

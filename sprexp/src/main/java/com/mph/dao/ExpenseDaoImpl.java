@@ -13,7 +13,11 @@ import org.springframework.stereotype.Repository;
 
 import com.mph.entity.Expense;
 
-
+/**
+ * 
+ * @author Sathiya,Sourav,Shishir,Shivani,Sujeet
+ *
+ */
 @Repository
 public class ExpenseDaoImpl implements ExpenseDao {
 
@@ -25,13 +29,23 @@ public class ExpenseDaoImpl implements ExpenseDao {
 	}
 
 	@Override
+	/**
+	 * 
+	 * for adding expense
+	 * @param expense
+	 */
 	public void addExpense(Expense expense) {
 		getSession().saveOrUpdate(expense);
 		System.out.println("Expense entry stored Successfully in DB !!!");
 
 	}
 
+
 	@Override
+	/**
+	 * for updating expense
+	 * @param expense
+	 */
 	public List<Expense> updateExpense(Expense expense) {
 		// check the query!!!!!!!!!!!!!!!
 		Query query = getSession().createQuery(
@@ -50,6 +64,10 @@ public class ExpenseDaoImpl implements ExpenseDao {
 	}
 
 	@Override
+	/**
+	 * for deleting expense by expenseId
+	 * @param expenseid
+	 */
 	public List<Expense> deleteExpense(int expenseId) {
 		// check the query!!!!!!!!!!!!!!!
 		Query query = getSession().createQuery("delete from Expense where expenseId=:expenseId");
@@ -63,6 +81,9 @@ public class ExpenseDaoImpl implements ExpenseDao {
 	}
 
 	@Override
+	/**
+	 * for fetching all expenses without any conditions
+	 */
 	public List<Expense> getAllExpense() {
 		// checkQuery!!!!!!!!!!!!!!!
 		Query query = getSession().createQuery("from Expense");
@@ -72,6 +93,10 @@ public class ExpenseDaoImpl implements ExpenseDao {
 	}
 
 	@Override
+	/**
+	 * for fetching a particular expense by expenseId
+	 * @param expenseid
+	 */
 	public Expense getExpenseById(int expenseId) {
 		Criteria c = getSession().createCriteria(Expense.class);
 		c.add(Restrictions.eq("expenseId", expenseId));
@@ -81,6 +106,10 @@ public class ExpenseDaoImpl implements ExpenseDao {
 	}
 
 	@Override
+	/**
+	 * for fetching all expense by  for a specific user
+	 * @param userid
+	 */
 	public List<Expense> getUserExpense(int userId) {
 		// TODO Auto-generated method stub
 		Query query = getSession().createQuery("from Expense expense where userId=:uid");

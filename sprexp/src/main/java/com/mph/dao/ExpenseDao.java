@@ -7,6 +7,11 @@ import org.hibernate.Query;
 
 import com.mph.entity.Expense;
 
+/**
+ * 
+ * @author Shishir
+ *
+ */
 public interface ExpenseDao {
 
 	public void addExpense(Expense expense);

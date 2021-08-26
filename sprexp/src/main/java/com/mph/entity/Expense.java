@@ -13,7 +13,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 
-
+/**
+ * 
+ * @author Sathiya
+ *
+ */
 @Entity
 public class Expense {
 	@Id

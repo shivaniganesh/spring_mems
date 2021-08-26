@@ -4,7 +4,11 @@ import java.util.List;
 
 import com.mph.entity.Expense;
 
-
+/**
+ * 
+ * @author Shishir
+ *
+ */
 public interface ExpenseService {
 
 	public void addExpense(Expense expense);

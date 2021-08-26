@@ -12,7 +12,11 @@ import org.springframework.stereotype.Repository;
 
 import com.mph.entity.Income;
 
-
+/**
+ * 
+ * @author Shivani
+ *
+ */
 @Repository
 public class IncomeDaoImpl implements IncomeDao {
 
@@ -24,6 +28,10 @@ public class IncomeDaoImpl implements IncomeDao {
 	}
 
 	@Override
+	/**
+	 * for adding income
+	 * @param income
+	 */
 	public void addIncome(Income income) {
 		getSession().saveOrUpdate(income);
 		System.out.println("Income entry stored Successfully in DB !!!");
@@ -31,6 +39,10 @@ public class IncomeDaoImpl implements IncomeDao {
 	}
 
 	@Override
+	/**
+	 * for updating income
+	 * @param income
+	 */
 	public List<Income> updateIncome(Income income) {
 		// check the query!!!!!!!!!!!!!!!
 		Query query = getSession().createQuery(
@@ -47,6 +59,10 @@ public class IncomeDaoImpl implements IncomeDao {
 	}
 
 	@Override
+	/**
+	 * for deleting income by income id
+	 * @param incomeId
+	 */
 	public List<Income> deleteIncome(int incomeId) {
 		// check the query!!!!!!!!!!!!!!!
 		Query query = getSession().createQuery("delete from Income where incomeId=:incomeId");
@@ -60,6 +76,10 @@ public class IncomeDaoImpl implements IncomeDao {
 	}
 
 	@Override
+	/**
+	 * for fetching all income
+	 * 
+	 */
 	public List<Income> getAllIncome() {
 		// checkQuery!!!!!!!!!!!!!!!
 		Query query = getSession().createQuery("from Income");
@@ -69,6 +89,10 @@ public class IncomeDaoImpl implements IncomeDao {
 	}
 
 	@Override
+	/**
+	 * for fetching a specific income by incomeId
+	 * @param incomeId
+	 */
 	public Income getIncomeById(int incomeId) {
 		Criteria c = getSession().createCriteria(Income.class);
 		c.add(Restrictions.eq("incomeId", incomeId));
@@ -78,6 +102,10 @@ public class IncomeDaoImpl implements IncomeDao {
 	}
 
 	@Override
+	/**
+	 * for fetching all income for a specific user by userId
+	 * @param userId
+	 */
 	public List<Income> getUserIncome(int userId) {
 		// TODO Auto-generated method stub
 		

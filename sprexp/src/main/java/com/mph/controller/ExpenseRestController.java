@@ -23,6 +23,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mph.entity.Expense;
 import com.mph.service.ExpenseService;
 
+/**
+ * 
+ * @author Shishir,Sourav,Sathiya
+ * 
+ *
+ */
 @RestController
 @RequestMapping(value = "/expense")
 @CrossOrigin(origins = "http://localhost:4200", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,
@@ -33,11 +39,18 @@ public class ExpenseRestController {
 	ExpenseService expenseService;
 	private static final Logger logger = Logger.getLogger(ExpenseRestController.class);
 
+	
+	
 	@RequestMapping(value = "/registerpage", method = RequestMethod.GET)
 	public ModelAndView register() {
 		return new ModelAndView("edit"); // actual page name
 
 	}
+	
+	/**
+	 * for fetching all expenses
+	 * @return allexpenses 
+	 */
 
 	@GetMapping("/allexpenses")
 	public ResponseEntity<List<Expense>> allExpenses() {
@@ -73,6 +86,11 @@ public class ExpenseRestController {
 		return expense;
 	}
 
+	/**
+	 * For updating expenses
+	 * @param expense
+	 * @return updated list of Expense
+	 */
 	@PutMapping("/updateexpense")
 	public ResponseEntity<List<Expense>> updateExpense(@RequestBody Expense expense) {
 
@@ -86,7 +104,11 @@ public class ExpenseRestController {
 		return new ResponseEntity<List<Expense>>(expenselist, HttpStatus.OK);
 
 	}
-
+	/**
+	 * for deleting expense by expenseId
+	 * @param expenseid
+	 * @return list of expense after deleting specific expense
+	 */
 	@DeleteMapping("/deleteExpense/{id}")
 	public ResponseEntity<List<Expense>> deleteExpense(@PathVariable("id") int expenseid) {
 
@@ -100,6 +122,12 @@ public class ExpenseRestController {
 		return new ResponseEntity<List<Expense>>(expenselist, HttpStatus.OK);
 	}
 
+	
+	/**
+	 * for fetching expense by expense id
+	 * @param expid
+	 * @return  expense of specific expense id
+	 */
 	@GetMapping("/getExpense/{id}")
 	public ResponseEntity<Expense> getEmployeeByID(@PathVariable("id") int expid) {
 
@@ -113,6 +141,11 @@ public class ExpenseRestController {
 		return new ResponseEntity<Expense>(exp, HttpStatus.OK);
 
 	}
+	/**
+	 * for fetching all the expense by particular user
+	 * @param userid
+	 * @return list of expenses by user
+	 */
 	@GetMapping("/selectedexpenses/{uid}")
 	public ResponseEntity<List<Expense>> selectedExpense(@PathVariable("uid") int userid) {
 		

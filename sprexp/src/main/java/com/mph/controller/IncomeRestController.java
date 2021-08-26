@@ -22,7 +22,11 @@ import com.mph.entity.Income;
 import com.mph.entity.Income;
 import com.mph.entity.UserProfile;
 import com.mph.service.IncomeService;
-
+/**
+ * 
+ * @author Shivani
+ *
+ */
 
 @RestController
 @RequestMapping(value = "/income")
@@ -33,6 +37,10 @@ public class IncomeRestController {
 	IncomeService incomeService;
 	private static final Logger logger = Logger.getLogger(IncomeRestController.class);
 	
+	/**
+	 * for fetching all incomes
+	 * @return all incomes
+	 */
 	@GetMapping("/allIncomes")
 	public ResponseEntity<List<Income>> allIncome() {
 
@@ -57,11 +65,22 @@ public class IncomeRestController {
 		return new ResponseEntity<List<Income>>(incomelist,HttpStatus.OK);		
 	}
 	
+	/**
+	 * for Adding income
+	 * @param income
+	 * @return income
+	 */
 	@PostMapping("/addIncome")
 	public Income addIncome(@RequestBody Income income) {
 		incomeService.addIncome(income);
 		return income;
 	}
+	
+	/**
+	 * for updating income
+	 * @param income
+	 * @return list of income after updating
+	 */
 
 	@PutMapping("/updateIncome")
 	public ResponseEntity<List<Income>> updateIncome(@RequestBody Income income) {
@@ -76,6 +95,11 @@ public class IncomeRestController {
 		return new ResponseEntity<List<Income>>(incomelist,HttpStatus.OK);		
 		
 	}
+	/**
+	 * for Deleting income by id
+	 * @param incomeid
+	 * @return  return list of income after deleting income
+	 */
 	
 	@DeleteMapping("/deleteIncome/{id}")
 	public ResponseEntity<List<Income>> deleteIncome(@PathVariable("id") int incomeid) {
@@ -90,6 +114,12 @@ public class IncomeRestController {
 		return new ResponseEntity<List<Income>>(incomelist,HttpStatus.OK);		
 	}
 	
+	/**
+	 * for get income by id
+	 * @param incomeId
+	 * @return income of specific income id
+	 */
+	
 	@GetMapping("/getIncome/{id}")
 	public ResponseEntity<Income> getIncomeByID(@PathVariable("id") int incomeId) {
 
@@ -103,6 +133,12 @@ public class IncomeRestController {
 		return new ResponseEntity<Income>(inc, HttpStatus.OK);
 
 	}
+	
+	/**
+	 * for fetching all incomes based on userId which is foreign key
+	 * @param userid
+	 * @return all income of particular userId
+	 */
 	@GetMapping("/selectedincomes/{uid}")
 	public ResponseEntity<List<Income>> selectedIncome(@PathVariable("uid") int userid) {
 		

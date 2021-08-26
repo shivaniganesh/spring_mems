@@ -4,7 +4,11 @@ import java.util.List;
 
 import com.mph.entity.Expense;
 import com.mph.entity.Income;
-
+/**
+ * 
+ * @author Sourav
+ *
+ */
 public interface IncomeDao {
 
 	public void addIncome(Income income);

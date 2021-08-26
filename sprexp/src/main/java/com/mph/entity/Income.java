@@ -8,6 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+/**
+ * 
+ * @author Shivani
+ *
+ */
 @Entity
 public class Income {
 	@Id
